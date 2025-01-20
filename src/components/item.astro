@@ -16,7 +16,7 @@ const channel = getEnv(import.meta.env, Astro, 'CHANNEL')
 const COMMENTS = getEnv(import.meta.env, Astro, 'COMMENTS')
 
 const datetime = dayjs(post.datetime).tz(timezone)
-const timeago = datetime.isBefore(dayjs().subtract(1, 'w')) ? datetime.format('HH:mm · ll · ddd') : datetime.fromNow()
+const timeago = datetime.format('HH:mm · YYYY年MM月DD日 · ddd')
 ---
 
 <div class="item" style={{ 'view-transition-name': `post-${post.id}` }}>
@@ -24,7 +24,8 @@ const timeago = datetime.isBefore(dayjs().subtract(1, 'w')) ? datetime.format('H
     <div class="dot"></div>
     <div class="time">
       <a href={`${SITE_URL}posts/${post.id}`} title={post.datetime} class="item-link">
-        <time datetime={post.datetime} title={timeago}>{timeago}</time>
+        <time>{timeago}</time>
+        <!-- 👆这里的时间做了修改-->
       </a>
     </div>
   </div>
